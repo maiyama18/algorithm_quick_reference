@@ -4,6 +4,8 @@ from insertion_sort import insertion_sort
 def bucket_sort(a):
     if len(a) <= 1:
         return a
+    if len(a) == 2:
+        return a if a[0] <= a[1] else [a[1], a[0]]
 
     b, h = make_buckets_and_hash(a)
     for ai in a:
@@ -26,8 +28,9 @@ def make_buckets_and_hash(a):
         def h(x):
             return x - minv
     else:
+
         b = [[] for _ in range(len(a))]
-        coef = ceil((maxv - minv) / len(a))
+        coef = ceil((maxv - minv) / (len(a) - 1))
         def h(x):
             return (x - minv) // coef
 
